@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summit at Renaissance Park - Working in Excellence</title>
+  <style>
+    /* Color and typography variables */
+    :root {
+      --primary-color-1: #94a4c0; /* Light Blue for headings */
+      --primary-color-2: #7f6550; /* Muted Brown for buttons/CTAs */
+      --body-font: Calibri, sans-serif;
+      --heading-font: Arial, sans-serif;
+      --cta-font: Verdana, sans-serif;
+      --body-font-size: 16px;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--body-font);
+      font-size: var(--body-font-size);
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      line-height: 1.6;
+      text-align: center;
+    }
+    header {
+      background: url('hero.jpg') no-repeat center center;
+      background-size: cover;
+      padding: 80px 20px;
+      position: relative;
+      color: #fff;
+      text-align: center;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+    }
+    header > * {
+      position: relative;
+      z-index: 1;
+    }
+    /* Fluid typography using clamp */
+    header h1 {
+      font-family: var(--heading-font);
+      font-weight: bold;
+      color: var(--primary-color-1);
+      margin: 0 0 10px;
+      font-size: clamp(30px, 5vw, 48px);
+    }
+    header p {
+      margin: 0 0 20px;
+      font-size: clamp(16px, 3vw, 24px);
+    }
+    nav {
+      background: #333;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav a {
+      color: #fff;
+      margin: 5px 15px;
+      text-decoration: none;
+      font-family: var(--heading-font);
+      font-weight: bold;
+      font-size: clamp(14px, 2vw, 16px);
+    }
+    section {
+      padding: 60px 20px;
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+    .feature {
+      background: #fff;
+      margin: 20px auto;
+      padding: 30px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .feature h2 {
+      font-family: var(--heading-font);
+      font-weight: bold;
+      color: var(--primary-color-1);
+      margin-top: 0;
+      font-size: clamp(20px, 3vw, 24px);
+    }
+    .feature p, .feature ul {
+      font-family: var(--body-font);
+      color: #333;
+      font-size: var(--body-font-size);
+      max-width: 800px;
+    }
+    .feature ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+      text-align: center;
+    }
+    .feature ul li {
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .feature ul li:last-child {
+      border-bottom: none;
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 20px;
+      margin-top: 40px;
+      text-align: center;
+    }
+    /* Responsive styling for fluid scaling */
+    @media(max-width: 1024px) {
+      header {
+        padding: 70px 15px;
+      }
+      section {
+        padding: 50px 15px;
+      }
+      .feature {
+        padding: 25px 15px;
+      }
+    }
+    @media(max-width: 768px) {
+      header {
+        padding: 60px 15px;
+      }
+      nav {
+        justify-content: center;
+      }
+      section {
+        padding: 40px 15px;
+      }
+    }
+    @media(max-width: 480px) {
+      header {
+        padding: 50px 10px;
+      }
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        margin: 5px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Working in Excellence</h1>
+    <p>Welcome to Summit at Renaissance Park</p>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#vibrant">Vibrant Area</a>
+    <a href="#amenities">Iconic Amenities</a>
+    <a href="#interiors">Stylish Interiors</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <section id="about" class="feature">
+    <h2>About Summit at Renaissance Park</h2>
+    <p>Welcome to Summit at Renaissance Park, an exclusive apartment community located in Harris County within the 77060 ZIP Code and served by the Aldine Independent attendance zone. Our community offers modern living with state-of-the-art smart security, remote control access, and innovative energy-efficient designs.</p>
+    <p><strong>Property Details:</strong></p>
+    <ul>
+      <li>Address: 12121 Greenspoint Dr, Houston, TX 77060</li>
+      <li>Built in 2024 with 325 units across 5 stories</li>
+      <li>Proximity to top-rated schools, dining, and transportation</li>
+      <li>Contact: (844) 791-4429</li>
+    </ul>
+  </section>
+  <section id="vibrant" class="feature">
+    <h2>Vibrant Area</h2>
+    <p>Experience the dynamic lifestyle at Summit at Renaissance Park. Located in the heart of Houston, our community boasts a pet-friendly environment complete with a designated dog park, a resort-style pool with sun deck, modern fitness center, lush community gardens, a children’s playscape, and a calming yoga studio. Enjoy diverse dining and thriving local culture just steps away.</p>
+  </section>
+  <section id="amenities" class="feature">
+    <h2>Iconic Amenities</h2>
+    <p>Embrace living at its finest with our exceptional amenities:</p>
+    <ul>
+      <li>Controlled Access & 24-Hour Security</li>
+      <li>Community Lounges & Clubhouses</li>
+      <li>State-of-the-Art Fitness Center</li>
+      <li>Outdoor Pool with Sun Deck</li>
+      <li>Children’s Play Areas & Community Gardens</li>
+      <li>Modern, Eco-Friendly Features</li>
+    </ul>
+  </section>
+  <section id="interiors" class="feature">
+    <h2>Stylish Interiors</h2>
+    <p>Discover remarkable one, two, three, and four bedroom apartments featuring modern sophistication. Enjoy premium finishes including granite countertops, designer tile backsplashes, wood grain flooring, and expansive 9-foot ceilings. Energy Star appliances and smart under-mount sinks elevate your everyday living experience.</p>
+  </section>
+  <section id="contact" class="feature">
+    <h2>Contact</h2>
+    <p>For leasing inquiries, please reach out:</p>
+    <ul>
+      <li><strong>Email:</strong> <a href="mailto:leasing@workatsarp.com">leasing@workatsarp.com</a></li>
+      <li><strong>Phone:</strong> <a href="tel:18337567368">18337567368</a></li>
+      <li><strong>Address:</strong> 12121 Greenspoint Dr, Houston, TX 77060</li>
+    </ul>
+  </section>
+  <footer>
+    <p>&copy; 2025 Summit at Renaissance Park. All rights reserved.</p>
+  </footer>
+</body>
+</html>
