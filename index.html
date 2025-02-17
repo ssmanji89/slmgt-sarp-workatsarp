@@ -3,273 +3,319 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Summit at Renaissance Park - Working in Excellence</title>
-  <style>
-    /* Color and typography variables */
-    :root {
-      --primary-color-1: #94a4c0; /* Light Blue for headings */
-      --primary-color-2: #7f6550; /* Muted Brown for buttons/CTAs */
-      --body-font: Calibri, sans-serif;
-      --heading-font: Arial, sans-serif;
-      --cta-font: Verdana, sans-serif;
-      --body-font-size: 16px;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: var(--body-font);
-      font-size: var(--body-font-size);
-      color: #333;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      line-height: 1.6;
-      text-align: center;
-    }
-    header {
-      background: url('hero.jpg') no-repeat center center;
-      background-size: cover;
-      padding: 80px 20px;
-      position: relative;
-      color: #fff;
-      text-align: center;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.75);
-    }
-    header > * {
-      position: relative;
-      z-index: 1;
-    }
-    /* Fluid typography using clamp */
-    header h1 {
-      font-family: var(--heading-font);
-      font-weight: bold;
-      color: #fff;
-      margin: 0 0 10px;
-      font-size: clamp(30px, 5vw, 48px);
-      letter-spacing: 1px;
-      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
-    }
-    header p {
-      margin: 0 0 20px;
-      font-size: clamp(16px, 3vw, 24px);
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-    }
-    nav {
-      background: #333;
-      padding: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    nav a {
-      color: #fff;
-      margin: 5px 15px;
-      text-decoration: none;
-      font-family: var(--heading-font);
-      font-weight: bold;
-      font-size: clamp(14px, 2vw, 16px);
-    }
-    section {
-      padding: 60px 20px;
-      width: 90%;
-      max-width: 1000px;
-      margin: auto;
-      text-align: center;
-    }
-    .feature {
-      background: #fff;
-      margin: 20px auto;
-      padding: 30px 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .feature h2 {
-      font-family: var(--heading-font);
-      font-weight: bold;
-      color: var(--primary-color-1);
-      margin-top: 0;
-      font-size: clamp(20px, 3vw, 24px);
-    }
-    .feature p, .feature ul {
-      font-family: var(--body-font);
-      color: #333;
-      font-size: var(--body-font-size);
-      max-width: 800px;
-    }
-    .feature ul {
-      list-style: none;
-      padding: 0;
-      margin: 10px 0;
-      text-align: center;
-    }
-    .feature ul li {
-      padding: 5px 0;
-      border-bottom: 1px solid #eee;
-    }
-    .feature ul li:last-child {
-      border-bottom: none;
-    }
-    footer {
-      background: #333;
-      color: #fff;
-      padding: 20px;
-      margin-top: 40px;
-      text-align: center;
-    }
-    .banner {
-      background: #e0e0e0;
-      padding: 40px 20px;
-      margin: 20px auto;
-      max-width: 1000px;
-      text-align: center;
-      height: 300px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-    .banner h2 {
-      font-family: var(--heading-font);
-      font-size: clamp(24px, 4vw, 36px);
-      margin: 0 0 10px;
-      color: #333;
-    }
-    .banner h3 {
-      font-family: var(--heading-font);
-      font-size: clamp(18px, 3vw, 28px);
-      margin: 0 0 10px;
-      color: #333;
-    }
-    .banner p {
-      font-family: var(--body-font);
-      font-size: var(--body-font-size);
-      color: #333;
-      margin: 0 0 10px;
-    }
-    /* Responsive styling for fluid scaling */
-    @media(max-width: 1024px) {
-      header {
-        padding: 70px 15px;
-      }
-      section {
-        padding: 50px 15px;
-      }
-      .feature {
-        padding: 25px 15px;
-      }
-    }
-    @media(max-width: 768px) {
-      header {
-        padding: 60px 15px;
-      }
-      nav {
-        justify-content: center;
-      }
-      section {
-        padding: 40px 15px;
-      }
-    }
-    @media(max-width: 480px) {
-      header {
-        padding: 50px 10px;
-      }
-      nav {
-        flex-direction: column;
-      }
-      nav a {
-        margin: 5px 0;
-      }
-    }
-  </style>
+  <title>Summit at Renaissance Park</title>
+  <meta name="description" content="Leasing and information portal for Summit at Renaissance Park.">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Header and Navigation -->
   <header>
-    <h1>Work in Excellence</h1>
-    <p>Welcome to Summit at Renaissance Park</p>
+    <h1>Summit at Renaissance Park</h1>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#vibrant-area">Vibrant Area</a></li>
+        <li><a href="#iconic-amenities">Iconic Amenities</a></li>
+        <li><a href="#stylish-interiors">Stylish Interiors</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </header>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#vibrant">Vibrant Area</a>
-    <a href="#amenities">Iconic Amenities</a>
-    <a href="#interiors">Stylish Interiors</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <section id="banner" class="banner">
-    <h2>Elevate Your Business at Summit at Renaissance Park</h2>
-    <h3>Prime Retail Opportunities in Houston’s Dynamic Market</h3>
-    <p><strong>Discover a rare opportunity to lease 17,000+ square feet of Class A retail space—designed to integrate seamlessly with a premier residential community and set in one of Houston’s most promising districts.</strong></p>
-    <button onclick="location.href='#contact'">Request Leasing Information</button>
-  </section>
-  <section id="opportunity" class="feature">
-    <h2>About the Opportunity</h2>
-    <p>Summit at Renaissance Park isn’t just an upscale residential destination—it also offers a sophisticated retail environment built to support and enhance the local community. The retail component is purposefully designed to attract businesses that provide services, dining, and lifestyle experiences for both residents and professionals in the area.</p>
-    <h3>Retail Space Features</h3>
-    <ul>
-      <li><strong>17,000+ Square Feet of Flexible Space:</strong> Modern design and open floor plans accommodate a variety of retail formats.</li>
-      <li><strong>Premium Finishes & State-of-the-Art Infrastructure:</strong> Ensure a sophisticated, contemporary look that appeals to high-end customers.</li>
-      <li><strong>High Visibility & Accessibility:</strong> Located near the northeast intersection of Beltway 8 and I-45 North, the space benefits from exceptional traffic and exposure.</li>
-      <li><strong>Integrated Mixed-Use Environment:</strong> With a thriving residential community and adjacent office campuses, enjoy an immediate, built-in customer base.</li>
-    </ul>
-    <h3>A Strategic Location for Growth</h3>
-    <ul>
-      <li><strong>Robust Foot Traffic:</strong> From local residents, professionals, and visitors drawn by nearby amenities.</li>
-      <li><strong>Proximity to Key Employment Centers:</strong> Including CityNorth’s office campus and major transit routes, ensuring a constant flow of potential customers.</li>
-      <li><strong>Economic Vitality & Growth Potential:</strong> The area is recognized for its dynamic revitalization efforts and increasing demand for quality retail services.</li>
-    </ul>
-    <h3>Community & Retail Synergy</h3>
-    <p>Leasing retail space at Summit at Renaissance Park means more than securing a location—it means joining an ecosystem that values quality, design, and connectivity. The curated mix of retail, dining, and services is intended to complement the residential environment, fostering built-in customer engagement and collaborative community dynamics.</p>
-  </section>
-  <section id="about" class="feature">
-    <h2>About Summit at Renaissance Park</h2>
-    <p>Welcome to Summit at Renaissance Park, an exclusive apartment community located in Harris County within the 77060 ZIP Code and served by the Aldine Independent attendance zone. Our community offers modern living with state-of-the-art smart security, remote control access, and innovative energy-efficient designs.</p>
-    <p><strong>Property Details:</strong></p>
-    <ul>
-      <li>Address: 12121 Greenspoint Dr, Houston, TX 77060</li>
-      <li>Built in 2024 with 325 units across 5 stories with over 17,000sqFt of Prime Retail Space</li>
-      <li>Proximity to top-rated schools, dining, and transportation</li>
-      <li>Contact: (833)-756-7368</li>
-    </ul>
-  </section>
-  <section id="vibrant" class="feature">
-    <h2>Vibrant Area</h2>
-    <p>Experience the dynamic lifestyle at Summit at Renaissance Park. Located in the heart of Houston, our community boasts a pet-friendly environment complete with a designated dog park, a resort-style pool with sun deck, modern fitness center, lush community gardens, a children’s playscape, and a calming yoga studio. Enjoy diverse dining and thriving local culture just steps away.</p>
-  </section>
-  <section id="amenities" class="feature">
-    <h2>Iconic Amenities</h2>
-    <p>Embrace living at its finest with our exceptional amenities:</p>
-    <ul>
-      <li>Controlled Access & 24-Hour Security</li>
-      <li>Community Lounges & Clubhouses</li>
-      <li>State-of-the-Art Fitness Center</li>
-      <li>Outdoor Pool with Sun Deck</li>
-      <li>Children’s Play Areas & Community Gardens</li>
-      <li>Modern, Eco-Friendly Features</li>
-    </ul>
-  </section>
-  <section id="interiors" class="feature">
-    <h2>Stylish Interiors</h2>
-    <p>Discover remarkable one, two, three, and four bedroom apartments featuring modern sophistication. Enjoy premium finishes including granite countertops, designer tile backsplashes, wood grain flooring, and expansive 9-foot ceilings. Energy Star appliances and smart under-mount sinks elevate your everyday living experience.</p>
-  </section>
-  <section id="contact" class="feature">
-    <h2>Contact</h2>
-    <p>For leasing inquiries, please reach out:</p>
-    <ul>
-      <li><strong>Email:</strong> <a href="mailto:leasing@workatsarp.com">leasing@workatsarp.com</a></li>
-      <li><strong>Phone:</strong> <a href="tel:18337567368">18337567368</a></li>
-      <li><strong>Address:</strong> 12121 Greenspoint Dr, Houston, TX 77060</li>
-    </ul>
-  </section>
-  <footer>
-    <p>&copy; 2025 Summit at Renaissance Park. All rights reserved.</p>
-  </footer>
+
+  <!-- Hero Section with Carousel Slider -->
+  <div class="hero" id="home">
+    <div class="et_pb_module et_pb_fullwidth_slider_0 et_pb_slider et_pb_slider_no_pagination et_pb_slider_parallax et_slider_auto et_slider_speed_6000 et_slider_auto_ignore_hover has-box-shadow-overlay et_slide_transition_to_next et_pb_bg_layout_dark" data-active-slide="et_pb_slide_1">
+      <div class="box-shadow-overlay"></div>
+      <div class="et_pb_slides">
+        <div class="et_pb_slide et_pb_slide_0 et_pb_section_video et_pb_bg_layout_dark et_pb_media_alignment_center et-pb-moved-slide" data-slide-id="et_pb_slide_0" data-fix-page-container="on" style="padding-top: 142px; z-index: 2; opacity: 0; display: none;">
+          <div class="et_pb_container clearfix" style="height: 848px; min-height: 848px;" data-fix-page-container="on">
+            <div class="et_pb_slider_container_inner">
+              <div class="et_pb_slide_description">
+                <h2 class="et_pb_slide_title"><a href="https://www.zgcompanies.com/about-us/profile/">"We don’t have to be smarter than the rest. We have to be more disciplined than the rest.” ----Warren Buffett</a></h2>
+                <div class="et_pb_button_wrapper"><a class="et_pb_button et_pb_more_button" href="https://www.zgcompanies.com/about-us/profile/">Learn More About Us</a></div>
+              </div>
+            </div>
+          </div>
+          <span class="et_pb_section_video_bg" data-ratio="2">
+            <span class="mejs-offscreen">Video Player</span>
+            <div id="mep_0" class="mejs-container mejs-container-keyboard-inactive mejs-video" tabindex="0" role="application" aria-label="Video Player" style="width: 1881px; height: 1056.94px; min-width: 0px; margin: 0px 0px 0px -940.5px;">
+              <div class="mejs-inner">
+                <div class="mejs-mediaelement">
+                  <mediaelementwrapper id="mejs_9594402053065436">
+                    <video loop="loop" autoplay="" playsinline="" muted="" id="mejs_9594402053065436_html5" preload="none" src="https://www.zgcompanies.com/wp-content/uploads/2021/01/Hardy-Yards-Pool-CG-Houston-TX.mp4" style="margin: 0px; width: 1881px; height: 1056.94px;">
+                      <source type="video/mp4" src="https://www.zgcompanies.com/wp-content/uploads/2021/01/Hardy-Yards-Pool-CG-Houston-TX.mp4">
+                    </video>
+                  </mediaelementwrapper>
+                </div>
+                <div class="mejs-layers">
+                  <div class="mejs-poster mejs-layer" style="display: none; width: 480px; height: 270px;"></div>
+                  <div class="mejs-overlay mejs-layer" style="width: 480px; height: 270px; display: none;">
+                    <div class="mejs-overlay-loading"><span class="mejs-overlay-loading-bg-img"></span></div>
+                  </div>
+                  <div class="mejs-overlay mejs-layer" style="display: none; width: 480px; height: 270px;"></div>
+                  <div class="mejs-overlay mejs-layer mejs-overlay-play" style="width: 480px; height: 270px;"><div class="mejs-overlay-button" role="button" tabindex="0" aria-label="Play" aria-pressed="false"></div></div>
+                </div>
+                <div class="mejs-controls mejs-offscreen" style="opacity: 0;">
+                  <div class="mejs-button mejs-playpause-button mejs-play">
+                    <button type="button" aria-controls="mep_0" title="Play" aria-label="Play" tabindex="0"></button>
+                  </div>
+                  <div class="mejs-time mejs-currenttime-container" role="timer" aria-live="off"><span class="mejs-currenttime">00:05</span></div>
+                  <div class="mejs-time-rail">
+                    <span class="mejs-time-total mejs-time-slider" role="slider" tabindex="0" aria-label="Time Slider" aria-valuemin="0" aria-valuemax="6.015" aria-valuenow="5.586126" aria-valuetext="00:05">
+                      <span class="mejs-time-buffering" style="display: none;"></span>
+                      <span class="mejs-time-loaded" style="transform: scaleX(1);"></span>
+                      <span class="mejs-time-current" style="transform: scaleX(0.93);"></span>
+                      <span class="mejs-time-hovered no-hover"></span>
+                      <span class="mejs-time-handle" style="transform: translateX(93px);"><span class="mejs-time-handle-content"></span></span>
+                      <span class="mejs-time-float"><span class="mejs-time-float-current">00:00</span><span class="mejs-time-float-corner"></span></span>
+                    </span>
+                  </div>
+                  <div class="mejs-time mejs-duration-container"><span class="mejs-duration">00:06</span></div>
+                  <div class="mejs-button mejs-volume-button mejs-unmute">
+                    <button type="button" aria-controls="mep_0" title="Unmute" aria-label="Unmute" tabindex="0"></button>
+                    <a href="javascript:void(0);" class="mejs-volume-slider" aria-label="Volume Slider" aria-valuemin="0" aria-valuemax="100" role="slider" aria-orientation="vertical" aria-valuenow="80" aria-valuetext="80%">
+                      <span class="mejs-offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span>
+                      <div class="mejs-volume-total">
+                        <div class="mejs-volume-current" style="bottom: 0px; height: 0%;"></div>
+                        <div class="mejs-volume-handle" style="bottom: 0%; margin-bottom: -3px;"></div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="mejs-button mejs-fullscreen-button">
+                    <button type="button" aria-controls="mep_0" title="Fullscreen" aria-label="Fullscreen" tabindex="0"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+        <div class="et_pb_slide et_pb_slide_1 et_pb_section_video et_pb_bg_layout_dark et_pb_media_alignment_center et-pb-active-slide" data-slide-id="et_pb_slide_1" style="padding-top: 142px; display: block; z-index: 1; opacity: 1;" data-fix-page-container="on">
+          <div class="et_pb_container clearfix" style="height: 848px; min-height: 848px;" data-fix-page-container="on">
+            <div class="et_pb_slider_container_inner">
+              <div class="et_pb_slide_description">
+                <h2 class="et_pb_slide_title"><a href="https://www.zgcompanies.com/about-us/profile/">“Successful men and women keep moving. They make mistakes, but they don’t quit.” ----Conrad Hilton</a></h2>
+                <div class="et_pb_button_wrapper"><a class="et_pb_button et_pb_more_button" href="https://www.zgcompanies.com/about-us/profile/">Learn More About Us</a></div>
+              </div>
+            </div>
+          </div>
+          <span class="et_pb_section_video_bg" data-ratio="1.7763157894736843">
+            <span class="mejs-offscreen">Video Player</span>
+            <div id="mep_1" class="mejs-container mejs-container-keyboard-inactive mejs-video" tabindex="0" role="application" aria-label="Video Player" style="width: 1881px; height: 1058.93px; margin: 0px 0px 0px -940.5px; min-width: 0px;">
+              <div class="mejs-inner">
+                <div class="mejs-mediaelement">
+                  <mediaelementwrapper id="mejs_09734263831372525">
+                    <video loop="loop" autoplay="" playsinline="" muted="" id="mejs_09734263831372525_html5" preload="none" src="https://www.zgcompanies.com/wp-content/uploads/2021/12/Hardy-Yards-Balcony_2.mp4" style="margin: 0px; width: 1881px; height: 1058.93px;">
+                      <source type="video/mp4" src="https://www.zgcompanies.com/wp-content/uploads/2021/12/Hardy-Yards-Balcony_2.mp4">
+                    </video>
+                  </mediaelementwrapper>
+                </div>
+                <div class="mejs-layers">
+                  <div class="mejs-poster mejs-layer" style="display: none; width: 1080px; height: 608px;"></div>
+                  <div class="mejs-overlay mejs-layer" style="width: 1080px; height: 608px;"><div class="mejs-overlay-loading"><span class="mejs-overlay-loading-bg-img"></span></div></div>
+                  <div class="mejs-overlay mejs-layer" style="display: none; width: 1080px; height: 608px;"><div class="mejs-overlay-error"></div></div>
+                  <div class="mejs-overlay mejs-layer mejs-overlay-play" style="width: 1080px; height: 608px; display: none;"><div class="mejs-overlay-button" role="button" tabindex="0" aria-label="Play" aria-pressed="false"></div></div>
+                </div>
+                <div class="mejs-controls mejs-offscreen" style="opacity: 0;">
+                  <div class="mejs-button mejs-playpause-button mejs-pause">
+                    <button type="button" aria-controls="mep_1" title="Pause" aria-label="Pause" tabindex="0"></button>
+                  </div>
+                  <div class="mejs-time mejs-currenttime-container" role="timer" aria-live="off"><span class="mejs-currenttime">00:05</span></div>
+                  <div class="mejs-time-rail">
+                    <span class="mejs-time-total mejs-time-slider" role="slider" tabindex="0" aria-label="Time Slider" aria-valuemin="0" aria-valuemax="5.972633" aria-valuenow="2.967637" aria-valuetext="00:02">
+                      <span class="mejs-time-buffering" style=""></span>
+                      <span class="mejs-time-loaded" style="transform: scaleX(1);"></span>
+                      <span class="mejs-time-current" style="transform: scaleX(0.5);"></span>
+                      <span class="mejs-time-hovered no-hover"></span>
+                      <span class="mejs-time-handle" style="transform: translateX(50px);"><span class="mejs-time-handle-content"></span></span>
+                      <span class="mejs-time-float"><span class="mejs-time-float-current">00:00</span><span class="mejs-time-float-corner"></span></span>
+                    </span>
+                  </div>
+                  <div class="mejs-time mejs-duration-container"><span class="mejs-duration">00:05</span></div>
+                  <div class="mejs-button mejs-volume-button mejs-unmute">
+                    <button type="button" aria-controls="mep_1" title="Unmute" aria-label="Unmute" tabindex="0"></button>
+                    <a href="javascript:void(0);" class="mejs-volume-slider" aria-label="Volume Slider" aria-valuemin="0" aria-valuemax="100" role="slider" aria-orientation="vertical" aria-valuenow="80" aria-valuetext="80%">
+                      <span class="mejs-offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span>
+                      <div class="mejs-volume-total">
+                        <div class="mejs-volume-current" style="bottom: 0px; height: 0%;"></div>
+                        <div class="mejs-volume-handle" style="bottom: 0%; margin-bottom: -3px;"></div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="mejs-button mejs-fullscreen-button">
+                    <button type="button" aria-controls="mep_1" title="Fullscreen" aria-label="Fullscreen" tabindex="0"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+        <div class="et_pb_slide et_pb_slide_2 et_pb_section_video et_pb_bg_layout_dark et_pb_media_alignment_center" data-slide-id="et_pb_slide_2" style="padding-top: 142px; display: none; z-index: 1; opacity: 0;" data-fix-page-container="on">
+          <div class="et_pb_container clearfix" style="height: 848px; min-height: 848px;" data-fix-page-container="on">
+            <div class="et_pb_slider_container_inner">
+              <div class="et_pb_slide_description">
+                <h2 class="et_pb_slide_title"><a href="https://www.zgcompanies.com/about-us/profile/">“Instead of thinking outside the box, get rid of the box.” ----Deepak Chopra</a></h2>
+                <div class="et_pb_button_wrapper"><a class="et_pb_button et_pb_more_button" href="https://www.zgcompanies.com/about-us/profile/">Learn More About Us</a></div>
+              </div>
+            </div>
+          </div>
+          <span class="et_pb_section_video_bg" data-ratio="1.7763157894736843">
+            <span class="mejs-offscreen">Video Player</span>
+            <div id="mep_2" class="mejs-container mejs-container-keyboard-inactive mejs-video" tabindex="0" role="application" aria-label="Video Player" style="width: 1881px; height: 1058.93px; margin: 0px 0px 0px -940.5px; min-width: 0px;">
+              <div class="mejs-inner">
+                <div class="mejs-mediaelement">
+                  <mediaelementwrapper id="mejs_19992266518416746">
+                    <video loop="loop" autoplay="" playsinline="" muted="" id="mejs_19992266518416746_html5" preload="none" src="https://www.zgcompanies.com/wp-content/uploads/2021/12/Birds-Eye-Pool.mp4" style="margin: 0px; width: 1881px; height: 1058.93px;">
+                      <source type="video/mp4" src="https://www.zgcompanies.com/wp-content/uploads/2021/12/Birds-Eye-Pool.mp4">
+                    </video>
+                  </mediaelementwrapper>
+                </div>
+                <div class="mejs-layers">
+                  <div class="mejs-poster mejs-layer" style="display: none; width: 1080px; height: 608px;"></div>
+                  <div class="mejs-overlay mejs-layer" style="width: 1080px; height: 608px; display: none;">
+                    <div class="mejs-overlay-loading"><span class="mejs-overlay-loading-bg-img"></span></div>
+                  </div>
+                  <div class="mejs-overlay mejs-layer" style="display: none; width: 1080px; height: 608px;">
+                    <div class="mejs-overlay-error"></div>
+                  </div>
+                  <div class="mejs-overlay mejs-layer mejs-overlay-play" style="width: 1080px; height: 608px;"><div class="mejs-overlay-button" role="button" tabindex="0" aria-label="Play" aria-pressed="false"></div></div>
+                </div>
+                <div class="mejs-controls mejs-offscreen" style="opacity: 0;">
+                  <div class="mejs-button mejs-playpause-button mejs-play">
+                    <button type="button" aria-controls="mep_2" title="Play" aria-label="Play" tabindex="0"></button>
+                  </div>
+                  <div class="mejs-time mejs-currenttime-container" role="timer" aria-live="off"><span class="mejs-currenttime">00:05</span></div>
+                  <div class="mejs-time-rail">
+                    <span class="mejs-time-total mejs-time-slider" role="slider" tabindex="0" aria-label="Time Slider" aria-valuemin="0" aria-valuemax="6.006" aria-valuenow="5.231089" aria-valuetext="00:05">
+                      <span class="mejs-time-buffering" style="display: none;"></span>
+                      <span class="mejs-time-loaded" style="transform: scaleX(1);"></span>
+                      <span class="mejs-time-current" style="transform: scaleX(0.87);"></span>
+                      <span class="mejs-time-hovered no-hover"></span>
+                      <span class="mejs-time-handle" style="transform: translateX(87px);"><span class="mejs-time-handle-content"></span></span>
+                      <span class="mejs-time-float"><span class="mejs-time-float-current">00:00</span><span class="mejs-time-float-corner"></span></span>
+                    </span>
+                  </div>
+                  <div class="mejs-time mejs-duration-container"><span class="mejs-duration">00:06</span></div>
+                  <div class="mejs-button mejs-volume-button mejs-unmute">
+                    <button type="button" aria-controls="mep_2" title="Unmute" aria-label="Unmute" tabindex="0"></button>
+                    <a href="javascript:void(0);" class="mejs-volume-slider" aria-label="Volume Slider" aria-valuemin="0" aria-valuemax="100" role="slider" aria-orientation="vertical" aria-valuenow="80" aria-valuetext="80%">
+                      <span class="mejs-offscreen">Use Up/Down Arrow keys to increase or decrease volume.</span>
+                      <div class="mejs-volume-total">
+                        <div class="mejs-volume-current" style="bottom: 0px; height: 0%;"></div>
+                        <div class="mejs-volume-handle" style="bottom: 0%; margin-bottom: -3px;"></div>
+                      </div>
+                    </a>
+                  </div>
+                  <div class="mejs-button mejs-fullscreen-button">
+                    <button type="button" aria-controls="mep_2" title="Fullscreen" aria-label="Fullscreen" tabindex="0"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="et-pb-slider-arrows">
+        <a class="et-pb-arrow-prev" href="#" data-fix-page-container="on" style="margin-top: 47px;"><span>Previous</span></a>
+        <a class="et-pb-arrow-next" href="#" data-fix-page-container="on" style="margin-top: 47px;"><span>Next</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- About Section -->
+    <section id="about">
+      <h2>Elevate Your Business at Summit at Renaissance Park</h2>
+      <p><strong>Prime Retail Opportunities in Houston’s Dynamic Market</strong></p>
+      <p>Discover a rare opportunity to lease 17,000+ square feet of Class A retail space—designed to integrate seamlessly with a premier residential community and set in one of Houston’s most promising districts.</p>
+      <h3>About the Opportunity</h3>
+      <p>Summit at Renaissance Park isn’t just an upscale residential destination—it also offers a sophisticated retail environment built to support and enhance the local community. The retail component is purposefully designed to attract businesses that provide services, dining, and lifestyle experiences for both residents and professionals in the area.</p>
+      <h3>Retail Space Features</h3>
+      <ul>
+        <li><strong>17,000+ Square Feet of Flexible Space:</strong> Modern design and open floor plans accommodate a variety of retail formats.</li>
+        <li><strong>Premium Finishes & State-of-the-Art Infrastructure:</strong> Ensure a sophisticated, contemporary look that appeals to high-end customers.</li>
+        <li><strong>High Visibility & Accessibility:</strong> Located near the northeast intersection of Beltway 8 and I-45 North, the space benefits from exceptional traffic and exposure.</li>
+        <li><strong>Integrated Mixed-Use Environment:</strong> With a thriving residential community and adjacent office campuses, enjoy an immediate, built-in customer base.</li>
+      </ul>
+      <h3>A Strategic Location for Growth</h3>
+      <ul>
+        <li><strong>Robust Foot Traffic:</strong> From local residents, professionals, and visitors drawn by nearby amenities.</li>
+        <li><strong>Proximity to Key Employment Centers:</strong> Including CityNorth’s office campus and major transit routes, ensuring a constant flow of potential customers.</li>
+        <li><strong>Economic Vitality & Growth Potential:</strong> The area is recognized for its dynamic revitalization efforts and increasing demand for quality retail services.</li>
+      </ul>
+      <h3>Community & Retail Synergy</h3>
+      <p>Leasing retail space at Summit at Renaissance Park means more than securing a location—it means joining an ecosystem that values quality, design, and connectivity. The curated mix of retail, dining, and services is intended to complement the residential environment, fostering built-in customer engagement and collaborative community dynamics.</p>
+      <h3>About Summit at Renaissance Park</h3>
+      <p>Welcome to Summit at Renaissance Park, an exclusive apartment community located in Harris County within the 77060 ZIP Code and served by the Aldine Independent attendance zone. Our community offers modern living with state-of-the-art smart security, remote control access, and innovative energy-efficient designs.</p>
+      <h3>Property Details</h3>
+      <ul>
+        <li><strong>Address:</strong> 12121 Greenspoint Dr, Houston, TX 77060</li>
+        <li><strong>Built:</strong> 2024 with 325 units across 5 stories with over 17,000 sq ft of Prime Retail Space</li>
+        <li><strong>Proximity:</strong> Top-rated schools, dining, and transportation</li>
+        <li><strong>Contact:</strong> (833)-756-7368</li>
+      </ul>
+    </section>
+
+    <!-- Vibrant Area Section -->
+    <section id="vibrant-area">
+      <h2>Vibrant Area</h2>
+      <p>Experience a lively and dynamic community space that encourages a modern lifestyle. Located in the heart of Houston, our community offers a pet-friendly environment complete with a designated dog park, a resort-style pool with sun deck, a modern fitness center, lush community gardens, a children’s playscape, and a relaxing yoga studio. Enjoy diverse dining and thriving local culture just steps away.</p>
+    </section>
+
+    <!-- Iconic Amenities Section -->
+    <section id="iconic-amenities">
+      <h2>Iconic Amenities</h2>
+      <p>Embrace living at its finest with our exceptional amenities:</p>
+      <ul>
+        <li>Controlled Access & 24-Hour Security</li>
+        <li>Community Lounges & Clubhouses</li>
+        <li>State-of-the-Art Fitness Center</li>
+        <li>Outdoor Pool with Sun Deck</li>
+        <li>Children’s Play Areas & Community Gardens</li>
+        <li>Modern, Eco-Friendly Features</li>
+      </ul>
+    </section>
+
+    <!-- Stylish Interiors Section -->
+    <section id="stylish-interiors">
+      <h2>Stylish Interiors</h2>
+      <p>Discover remarkable one, two, three, and four bedroom apartments featuring modern sophistication. Enjoy premium finishes including granite countertops, designer tile backsplashes, wood grain flooring, and expansive 9-foot ceilings. Energy Star appliances and smart under-mount sinks elevate your everyday living experience.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>For leasing inquiries, please reach out:</p>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:leasing@workatsarp.com">leasing@workatsarp.com</a></li>
+        <li><strong>Phone:</strong> (833)-756-7368</li>
+        <li><strong>Address:</strong> 12121 Greenspoint Dr, Houston, TX 77060</li>
+      </ul>
+      <p>If you are interested in leasing opportunities, please click the button below to draft an inquiry email.</p>
+      <a href="mailto:leasing@workatsarp.com?subject=Leasing Inquiry at Summit%20at%20Renaissance%20Park&body=Dear%20Leasing%20Team,%0A%0AI%20am%20interested%20in%20learning%20more%20about%20the%20leasing%20opportunities%20at%20Summit%20at%20Renaissance%20Park.%0A%0AThank%20you,%0A[Your%20Name]" style="display: inline-block; padding: 10px 20px; background-color: #00457c; color: #fff; text-decoration: none; border-radius: 4px; margin-top: 10px;">Draft Inquiry Email</a>
+    </section>
+  </main>
+
+  <!-- External JavaScript -->
+  <script src="js/app.js" defer></script>
+
+  <!-- Milestone Documentation and Checkpoint Updates -->
+  <!--
+      Milestone: Production-Ready Iteration #6
+      - Implemented modular JavaScript architecture with separate app.js file
+      - Enhanced error handling with detailed logging and retry mechanisms
+      - Added dynamic content management with loading states
+      - Improved navigation with smooth scrolling and active state tracking
+      - Integrated comprehensive analytics tracking
+      - Enhanced UI with loading indicators and animations
+      - Separated concerns with external CSS file
+      
+      Next Steps:
+      - Implement service worker for offline capabilities
+      - Add unit and integration tests
+      - Set up continuous integration pipeline
+      - Implement content caching strategy
+  -->
 </body>
 </html>
