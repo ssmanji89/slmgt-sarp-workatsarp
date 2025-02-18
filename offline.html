@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summit at Renaissance Park - Offline</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .offline-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .offline-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .offline-message {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .cached-content {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f5f5f5;
+            border-radius: 8px;
+        }
+
+        .retry-button {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .retry-button:hover {
+            background-color: #0056b3;
+        }
+
+        .loading {
+            display: none;
+            margin: 1rem 0;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .status-message {
+            margin-top: 1rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <h1 data-testid="offline-message" class="offline-message">You're currently offline</h1>
+        <p>Don't worry! You can still access previously viewed content.</p>
+        
+        <button data-testid="retry-button" class="retry-button" onclick="retryConnection()">
+            Try to Reconnect
+        </button>
+
+        <div class="loading">
+            Checking connection...
+        </div>
+
+        <div class="status-message"></div>
+
+        <div class="cached-content">
+            <h2>Available Offline Content</h2>
+            <div id="cached-pages"></div>
+        </div>
+    </div>
+
+    <script>
+        // Function to check network status and attempt reconnection
+        window.retryConnection = async function() {
+            const button = document.querySelector('.retry-button');
+            const loading = document.querySelector('.loading');
+            const status = document.querySelector('.status-message');
+
+            button.disabled = true;
+            loading.classList.add('active');
+            status.textContent = '';
+
+            try {
+                const response = await fetch(window.location.origin);
+                if (response.ok) {
+                    status.textContent = 'Connection restored! Redirecting...';
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                status.textContent = 'Still offline. Please try again later.';
+                button.disabled = false;
+            } finally {
+                loading.classList.remove('active');
+            }
+        }
+
+        // Function to display cached pages
+        window.displayCachedPages = async function() {
+            const cache = await caches.open('sarp-cache-v1');
+            const keys = await cache.keys();
+            const cachedPages = document.getElementById('cached-pages');
+            
+            if (keys.length === 0) {
+                cachedPages.innerHTML = '<p>No cached content available</p>';
+                return;
+            }
+
+            const pageList = keys
+                .map(request => {
+                    const url = new URL(request.url);
+                    const path = url.pathname;
+                    if (path === '/') return '<li><a href="/">Home</a></li>';
+                    return `<li><a href="${path}">${path.slice(1)}</a></li>`;
+                })
+                .join('');
+
+            cachedPages.innerHTML = `<ul>${pageList}</ul>`;
+        }
+
+        // Initialize the offline page
+        window.addEventListener('load', () => {
+            displayCachedPages();
+            
+            // Set up retry button click handler
+            const button = document.querySelector('.retry-button');
+            button.onclick = retryConnection;
+            
+            // Check connection status periodically
+            setInterval(() => {
+                if (navigator.onLine) {
+                    document.querySelector('.status-message').textContent = 
+                        'Connection detected! You can try to reconnect.';
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+</html>

@@ -1,186 +1,230 @@
-// Configuration
-const config = {
-  logEndpoint: 'https://example.com/api/log-error',
-  maxRetries: 3,
-  contentEndpoint: 'https://api.workatsarp.com/content',
-  analyticsEndpoint: 'https://api.workatsarp.com/analytics'
-};
-
-// Content Management
-class ContentManager {
-  static async fetchContent(section) {
-    try {
-      const content = await fetchWithRetry(
-        `${config.contentEndpoint}/${section}`,
-        { headers: { 'Accept': 'application/json' } }
-      );
-      return content;
-    } catch (error) {
-      logError(error, `Content fetch for ${section}`);
-      return null;
-    }
-  }
-
-  static async updateSection(sectionId, content) {
-    try {
-      const section = document.getElementById(sectionId);
-      if (!section) throw new Error(`Section ${sectionId} not found`);
-      
-      // Show loading state
-      section.classList.add('loading');
-      
-      // Update content
-      section.innerHTML = content;
-      
-      // Remove loading state
-      section.classList.remove('loading');
-      
-      // Track successful update
-      Analytics.trackEvent('contentUpdate', { section: sectionId });
-    } catch (error) {
-      logError(error, `Content update for ${sectionId}`);
-    }
-  }
-}
-
-// Analytics
-class Analytics {
-  static async trackEvent(eventName, data = {}) {
-    try {
-      await fetchWithRetry(config.analyticsEndpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event: eventName,
-          data,
-          timestamp: new Date().toISOString()
-        })
-      });
-    } catch (error) {
-      logError(error, `Analytics tracking for ${eventName}`);
-    }
-  }
-
-  static trackPageView() {
-    const path = window.location.pathname;
-    this.trackEvent('pageView', { path });
-  }
-
-  static trackPerformance() {
-    if (window.performance && window.performance.timing) {
-      const timing = window.performance.timing;
-      const loadTime = timing.loadEventEnd - timing.navigationStart;
-      this.trackEvent('performance', { loadTime });
-    }
-  }
-}
-
-// Navigation Manager
-class NavigationManager {
-  constructor() {
-    this.setupEventListeners();
-  }
-
-  setupEventListeners() {
-    // Smooth scroll for navigation links
-    document.querySelectorAll('nav a[href^="#"]').forEach(link => {
-      link.addEventListener('click', this.handleNavClick.bind(this));
-    });
-
-    // Update active nav item on scroll
-    window.addEventListener('scroll', this.updateActiveNav.bind(this));
-  }
-
-  handleNavClick(event) {
-    event.preventDefault();
-    const targetId = event.currentTarget.getAttribute('href').slice(1);
-    const targetElement = document.getElementById(targetId);
-    
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-      Analytics.trackEvent('navigation', { target: targetId });
-    }
-  }
-
-  updateActiveNav() {
-    const sections = document.querySelectorAll('main section');
-    const navLinks = document.querySelectorAll('nav ul li a');
-    
-    let activeIndex = 0;
-    const scrollPosition = window.scrollY + 60;
-
-    sections.forEach((section, index) => {
-      if (scrollPosition >= section.offsetTop) {
-        activeIndex = index;
-      }
-    });
-
-    navLinks.forEach(link => link.classList.remove('active'));
-    if (navLinks[activeIndex]) {
-      navLinks[activeIndex].classList.add('active');
-    }
-  }
-}
-
-// Error Handling
-async function fetchWithRetry(url, options, retries = config.maxRetries) {
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    if (retries > 0) {
-      console.warn(`Fetch failed, retrying... (${retries} attempts left)`, error);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      return fetchWithRetry(url, options, retries - 1);
-    }
-    throw error;
-  }
-}
-
-async function logError(error, context = '') {
-  console.error(`Error in ${context}:`, error);
-  
-  try {
-    await fetchWithRetry(config.logEndpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        error: error.toString(),
-        context,
-        stack: error.stack,
-        timestamp: new Date().toISOString(),
-        userAgent: navigator.userAgent,
-        url: window.location.href
-      })
-    });
-  } catch (logError) {
-    console.warn('Failed to send error log:', logError);
-  }
-}
-
-// Initialize Application
+// Form validation and submission
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize navigation
-  const nav = new NavigationManager();
-  
-  // Track page view
-  Analytics.trackPageView();
-  
-  // Track performance metrics
-  window.addEventListener('load', () => {
-    Analytics.trackPerformance();
-  });
-  
-  // Global error handler
-  window.onerror = (message, source, lineno, colno, error) => {
-    logError(error || message, 'Global Error');
-  };
-  
-  // Handle unhandled promise rejections
-  window.addEventListener('unhandledrejection', event => {
-    logError(event.reason, 'Unhandled Promise Rejection');
-  });
+    // Form handling
+    const form = document.getElementById('contact-form');
+    if (form) {
+        form.addEventListener('submit', handleFormSubmit);
+    }
+
+    // Mobile menu handling
+    const mobileMenuButton = document.querySelector('[data-testid="mobile-menu-button"]');
+    const nav = document.getElementById('mainNav');
+    if (mobileMenuButton && nav) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenuButton.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        nav.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                mobileMenuButton.classList.remove('active');
+                nav.classList.remove('active');
+            }
+        });
+    }
+
+    // Handle hash changes
+    window.addEventListener('hashchange', () => {
+        const hash = window.location.hash;
+        if (hash) {
+            const targetElement = document.querySelector(hash);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+                updateActiveNavLink(document.querySelector(`nav a[href="${hash}"]`));
+            }
+        }
+    });
+
+    // Navigation handling
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            if (link.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    updateActiveNavLink(link);
+                    // Update URL hash without triggering scroll
+                    history.pushState(null, '', link.getAttribute('href'));
+                }
+            }
+        });
+    });
+
+    // Handle initial hash
+    if (window.location.hash) {
+        const targetElement = document.querySelector(window.location.hash);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+            updateActiveNavLink(document.querySelector(`nav a[href="${window.location.hash}"]`));
+        }
+    }
 });
+
+// Form submission handler
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    clearErrors();
+
+    // Validate form
+    const errors = validateForm(formData);
+    if (Object.keys(errors).length > 0) {
+        displayErrors(errors);
+        return;
+    }
+
+    // Prepare submission data
+    const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message')
+    };
+
+    try {
+        const response = await submitForm(data);
+        if (response.ok) {
+            showSuccessMessage('Message sent successfully');
+            form.reset();
+        } else {
+            throw new Error('Server error');
+        }
+    } catch (error) {
+        handleSubmissionError(error);
+        // Store form data for retry
+        localStorage.setItem('pendingFormData', JSON.stringify(data));
+    }
+}
+
+// Form validation
+function validateForm(formData) {
+    const errors = {};
+    
+    if (!formData.get('name')) {
+        errors.name = 'Name is required';
+    }
+    
+    const email = formData.get('email');
+    if (!email) {
+        errors.email = 'Email is required';
+    } else if (!isValidEmail(email)) {
+        errors.email = 'Please enter a valid email address';
+    }
+    
+    if (!formData.get('message')) {
+        errors.message = 'Message is required';
+    }
+    
+    return errors;
+}
+
+// Email validation
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Display form errors
+function displayErrors(errors) {
+    Object.keys(errors).forEach(field => {
+        const errorElement = document.querySelector(`[data-testid="${field}-error"]`);
+        if (errorElement) {
+            errorElement.textContent = errors[field];
+            errorElement.style.display = 'block';
+        }
+    });
+}
+
+// Clear form errors
+function clearErrors() {
+    const errorElements = document.querySelectorAll('.error-message');
+    errorElements.forEach(element => {
+        element.textContent = '';
+        element.style.display = 'none';
+    });
+}
+
+// Submit form data
+async function submitForm(data) {
+    return fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+}
+
+// Handle submission error
+function handleSubmissionError(error) {
+    const errorMessage = document.querySelector('[data-testid="error-message"]');
+    const retryButton = document.querySelector('[data-testid="retry-button"]');
+    
+    if (errorMessage) {
+        errorMessage.textContent = 'An error occurred while sending your message';
+        errorMessage.style.display = 'block';
+    }
+    
+    if (retryButton) {
+        retryButton.style.display = 'block';
+        retryButton.onclick = retrySubmission;
+    }
+}
+
+// Show success message
+function showSuccessMessage(message) {
+    const successMessage = document.querySelector('[data-testid="success-message"]');
+    if (successMessage) {
+        successMessage.textContent = message;
+        successMessage.style.display = 'block';
+    }
+}
+
+// Retry form submission
+async function retrySubmission() {
+    const pendingData = localStorage.getItem('pendingFormData');
+    if (!pendingData) return;
+
+    try {
+        const data = JSON.parse(pendingData);
+        const response = await submitForm(data);
+        
+        if (response.ok) {
+            showSuccessMessage('Message sent successfully');
+            localStorage.removeItem('pendingFormData');
+            
+            const retryButton = document.querySelector('[data-testid="retry-button"]');
+            const errorMessage = document.querySelector('[data-testid="error-message"]');
+            
+            if (retryButton) retryButton.style.display = 'none';
+            if (errorMessage) errorMessage.style.display = 'none';
+        } else {
+            throw new Error('Server error');
+        }
+    } catch (error) {
+        handleSubmissionError(error);
+    }
+}
+
+// Update active navigation link
+function updateActiveNavLink(activeLink) {
+    document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+    });
+    activeLink.classList.add('active');
+}
+
+// Offline status handling
+window.addEventListener('online', handleOnlineStatus);
+window.addEventListener('offline', handleOnlineStatus);
+
+function handleOnlineStatus() {
+    const offlineIndicator = document.querySelector('[data-testid="offline-indicator"]');
+    if (offlineIndicator) {
+        offlineIndicator.style.display = navigator.onLine ? 'none' : 'block';
+    }
+}

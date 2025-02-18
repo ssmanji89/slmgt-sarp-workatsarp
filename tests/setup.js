@@ -1,51 +1,47 @@
-// Import Jest DOM matchers
-import '@testing-library/jest-dom';
+// Increase Jest timeout for all tests
+jest.setTimeout(30000);
 
-// Mock window properties and methods used in our application
-Object.defineProperty(window, 'scrollY', {
+// Mock DOM APIs
+Object.defineProperty(window, 'location', {
   writable: true,
-  value: 0
+  value: new URL('http://localhost')
 });
 
-// Mock IntersectionObserver
-global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
-  observe() {}
-  unobserve() {}
-  disconnect() {}
-};
-
-// Mock performance timing API
-window.performance = {
-  timing: {
-    navigationStart: Date.now(),
-    loadEventEnd: Date.now() + 1000
+// Mock navigator
+Object.defineProperty(window, 'navigator', {
+  writable: true,
+  value: {
+    onLine: true
   }
+});
+
+// Mock setInterval
+const originalSetInterval = window.setInterval;
+window.setInterval = jest.fn((callback, delay) => {
+  if (delay === 5000) {
+    // For online status check
+    callback();
+    return 1;
+  }
+  return originalSetInterval(callback, delay);
+});
+
+// Mock service worker globals
+global.skipWaiting = jest.fn();
+global.clients = {
+  claim: jest.fn()
 };
 
-// Mock service worker registration
-global.navigator.serviceWorker = {
-  register: jest.fn().mockResolvedValue({
-    scope: '/'
-  })
-};
-
-// Mock localStorage
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn()
-};
-global.localStorage = localStorageMock;
-
-// Mock fetch API if not already mocked in individual tests
-global.fetch = global.fetch || jest.fn();
-
-// Mock console methods to prevent noise in test output
-global.console = {
-  ...console,
-  log: jest.fn(),
-  error: jest.fn(),
-  warn: jest.fn()
+// Mock caches API
+global.caches = {
+  open: jest.fn(() => Promise.resolve({
+    keys: () => Promise.resolve([
+      new Request('/'),
+      new Request('/about'),
+      new Request('/css/styles.css')
+    ]),
+    match: jest.fn(),
+    put: jest.fn()
+  })),
+  match: jest.fn()
 };

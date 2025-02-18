@@ -2,9 +2,16 @@ const CACHE_NAME = 'sarp-cache-v1';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
+  '/offline.html',
   '/css/styles.css',
   '/js/app.js',
   '/images/hero.jpg'
+];
+
+// Navigation routes that should serve index.html
+const NAVIGATION_ROUTES = [
+  '/',
+  '/index.html'
 ];
 
 // Install Service Worker
@@ -37,17 +44,28 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch Event Strategy: Cache First, Network Fallback
+// Fetch Event Strategy: Cache First, Network Fallback with Offline Page
 self.addEventListener('fetch', event => {
+  // Handle navigation requests
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .catch(() => {
+          return caches.match('/offline.html');
+        })
+    );
+    return;
+  }
+
+  // Handle other requests
   event.respondWith(
     caches.match(event.request)
       .then(response => {
-        // Cache hit - return response
         if (response) {
-          return response;
+          return response; // Cache hit
         }
 
-        // Clone the request because it can only be used once
+        // Clone the request
         const fetchRequest = event.request.clone();
 
         return fetch(fetchRequest)
@@ -57,19 +75,34 @@ self.addEventListener('fetch', event => {
               return response;
             }
 
-            // Clone the response because it can only be used once
+            // Clone the response
             const responseToCache = response.clone();
 
+            // Cache the response
             caches.open(CACHE_NAME)
               .then(cache => {
-                cache.put(event.request, responseToCache);
+                // Only cache successful responses
+                if (response.ok) {
+                  cache.put(event.request, responseToCache);
+                }
               });
 
             return response;
           })
           .catch(error => {
             console.error('Fetch failed:', error);
-            // You might want to return a custom offline page here
+            // For API requests, return a JSON error
+            if (event.request.url.includes('/api/')) {
+              return new Response(
+                JSON.stringify({ error: 'Network error', offline: true }),
+                { 
+                  status: 503,
+                  headers: { 'Content-Type': 'application/json' }
+                }
+              );
+            }
+            // For other resources, try to return a cached version
+            return caches.match(event.request);
           });
       })
   );
