@@ -66,6 +66,65 @@ document.addEventListener('DOMContentLoaded', function() {
                 heroSection.addEventListener('mouseleave', () => {
                     startSlideshow();
                 });
+                
+                // Touch swipe support for mobile
+                let touchStartX = 0;
+                let touchEndX = 0;
+                
+                heroSection.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                    // Pause slideshow on touch
+                    clearInterval(slideInterval);
+                }, { passive: true });
+                
+                heroSection.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    handleSwipe();
+                    // Resume slideshow after touch
+                    startSlideshow();
+                }, { passive: true });
+                
+                function handleSwipe() {
+                    const swipeThreshold = 50; // Minimum distance to be considered a swipe
+                    if (touchEndX < touchStartX - swipeThreshold) {
+                        // Swipe left, go to next slide
+                        nextSlide();
+                    } else if (touchEndX > touchStartX + swipeThreshold) {
+                        // Swipe right, go to previous slide
+                        prevSlide();
+                    }
+                }
+            }
+            
+            // Keyboard navigation for accessibility
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                }
+            });
+            
+            // Add ARIA attributes for accessibility
+            heroSlides.forEach((slide, index) => {
+                slide.setAttribute('aria-hidden', index === currentSlide ? 'false' : 'true');
+                slide.setAttribute('role', 'tabpanel');
+                slide.setAttribute('id', `slide-${index}`);
+            });
+            
+            heroDots.forEach((dot, index) => {
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                dot.setAttribute('role', 'tab');
+                dot.setAttribute('aria-controls', `slide-${index}`);
+                dot.setAttribute('aria-selected', index === currentSlide ? 'true' : 'false');
+            });
+            
+            if (heroPrev) {
+                heroPrev.setAttribute('aria-label', 'Previous slide');
+            }
+            
+            if (heroNext) {
+                heroNext.setAttribute('aria-label', 'Next slide');
             }
         }
     }
@@ -73,20 +132,43 @@ document.addEventListener('DOMContentLoaded', function() {
     // Go to specific slide
     function goToSlide(index) {
         // Remove active class from all slides and dots
-        heroSlides.forEach(slide => {
+        heroSlides.forEach((slide, i) => {
             slide.classList.remove('active');
+            // Update ARIA attributes
+            slide.setAttribute('aria-hidden', 'true');
         });
         
-        heroDots.forEach(dot => {
+        heroDots.forEach((dot, i) => {
             dot.classList.remove('active');
+            // Update ARIA attributes
+            dot.setAttribute('aria-selected', 'false');
         });
         
         // Add active class to current slide and dot
         heroSlides[index].classList.add('active');
         heroDots[index].classList.add('active');
         
+        // Update ARIA attributes for the active slide and dot
+        heroSlides[index].setAttribute('aria-hidden', 'false');
+        heroDots[index].setAttribute('aria-selected', 'true');
+        
         // Update current slide index
         currentSlide = index;
+        
+        // Announce slide change to screen readers
+        const liveRegion = document.getElementById('carousel-live-region') || createLiveRegion();
+        liveRegion.textContent = `Slide ${index + 1} of ${heroSlides.length}`;
+    }
+    
+    // Create a live region for screen reader announcements
+    function createLiveRegion() {
+        const liveRegion = document.createElement('div');
+        liveRegion.id = 'carousel-live-region';
+        liveRegion.setAttribute('aria-live', 'polite');
+        liveRegion.setAttribute('aria-atomic', 'true');
+        liveRegion.className = 'sr-only';
+        document.body.appendChild(liveRegion);
+        return liveRegion;
     }
     
     // Go to next slide
@@ -173,28 +255,139 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             if (isValid) {
-                // In a real implementation, this would submit the form data
-                // For now, we'll just show a success message
-                const formContainer = form.closest('.contact-form-container, .contact-form-preview');
+                // Get form data
+                const formData = new FormData(form);
+                const formDataObj = {};
+                formData.forEach((value, key) => {
+                    formDataObj[key] = value;
+                });
                 
-                if (formContainer) {
-                    const originalContent = formContainer.innerHTML;
-                    formContainer.innerHTML = `
-                        <div class="form-success">
-                            <div class="success-icon">
-                                <i class="fas fa-check-circle"></i>
-                            </div>
-                            <h3>Thank You!</h3>
-                            <p>Your message has been sent successfully. A member of our leasing team will contact you shortly.</p>
-                        </div>
-                    `;
+                // Get form container for showing success/error messages
+                const formContainer = form.closest('.contact-form-container, .contact-form-preview');
+                const originalContent = formContainer ? formContainer.innerHTML : '';
+                
+                // Show loading state
+                const submitButton = form.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                
+                // In a real implementation, this would be an actual API endpoint
+                // For demonstration purposes, we're simulating an API call
+                setTimeout(() => {
+                    // Simulate successful form submission
+                    console.log('Form data submitted:', formDataObj);
                     
-                    // For demo purposes, reset the form after 5 seconds
-                    setTimeout(() => {
-                        formContainer.innerHTML = originalContent;
-                        initFormListeners();
-                    }, 5000);
-                }
+                    // Show success message
+                    if (formContainer) {
+                        formContainer.innerHTML = `
+                            <div class="form-success">
+                                <div class="success-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3>Thank You!</h3>
+                                <p>Your message has been sent successfully. A member of our leasing team will contact you shortly.</p>
+                                <button class="btn btn-primary mt-4 reset-form">Send Another Message</button>
+                            </div>
+                        `;
+                        
+                        // Add event listener to the "Send Another Message" button
+                        const resetButton = formContainer.querySelector('.reset-form');
+                        if (resetButton) {
+                            resetButton.addEventListener('click', () => {
+                                formContainer.innerHTML = originalContent;
+                                initFormListeners();
+                            });
+                        }
+                    } else {
+                        // Reset form if no container is found
+                        form.reset();
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                        
+                        // Show alert if no container is available
+                        alert('Thank you! Your message has been sent successfully.');
+                    }
+                }, 1500); // Simulate network delay
+                
+                // In a real implementation, you would use fetch or XMLHttpRequest:
+                /*
+                fetch('https://api.workatsarp.com/submit-inquiry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formDataObj),
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Show success message
+                    if (formContainer) {
+                        formContainer.innerHTML = `
+                            <div class="form-success">
+                                <div class="success-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3>Thank You!</h3>
+                                <p>Your message has been sent successfully. A member of our leasing team will contact you shortly.</p>
+                                <button class="btn btn-primary mt-4 reset-form">Send Another Message</button>
+                            </div>
+                        `;
+                        
+                        // Add event listener to the "Send Another Message" button
+                        const resetButton = formContainer.querySelector('.reset-form');
+                        if (resetButton) {
+                            resetButton.addEventListener('click', () => {
+                                formContainer.innerHTML = originalContent;
+                                initFormListeners();
+                            });
+                        }
+                    } else {
+                        // Reset form if no container is found
+                        form.reset();
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    
+                    // Show error message
+                    if (formContainer) {
+                        formContainer.innerHTML = `
+                            <div class="form-error">
+                                <div class="error-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <h3>Oops!</h3>
+                                <p>Something went wrong while sending your message. Please try again later or contact us directly.</p>
+                                <button class="btn btn-primary mt-4 reset-form">Try Again</button>
+                            </div>
+                        `;
+                        
+                        // Add event listener to the "Try Again" button
+                        const resetButton = formContainer.querySelector('.reset-form');
+                        if (resetButton) {
+                            resetButton.addEventListener('click', () => {
+                                formContainer.innerHTML = originalContent;
+                                initFormListeners();
+                            });
+                        }
+                    } else {
+                        // Reset form if no container is found
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalButtonText;
+                        
+                        // Show alert if no container is available
+                        alert('Error: Something went wrong while sending your message. Please try again later.');
+                    }
+                });
+                */
             }
         });
         
@@ -254,16 +447,41 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Placeholder for map integration
-    // In a real implementation, this would initialize a map service like Google Maps
-    const mapPlaceholders = document.querySelectorAll('.map-placeholder');
+    // Google Maps integration
+    // The map is now embedded directly in the HTML using an iframe
+    // This function can be used to add additional map functionality if needed
+    function initMap() {
+        // Get all map embed containers
+        const mapEmbeds = document.querySelectorAll('.map-embed');
+        
+        if (mapEmbeds.length > 0) {
+            // Add click event to open Google Maps in a new tab when clicked
+            mapEmbeds.forEach(mapEmbed => {
+                mapEmbed.addEventListener('click', function(e) {
+                    // Only open if clicking on the map itself, not on controls
+                    if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
+                        // Get the iframe src
+                        const iframe = this.querySelector('iframe');
+                        if (iframe) {
+                            const src = iframe.getAttribute('src');
+                            // Extract the location from the src
+                            const locationMatch = src.match(/!1m2!1s([^!]+)/);
+                            if (locationMatch && locationMatch[1]) {
+                                // Open Google Maps in a new tab
+                                window.open(`https://www.google.com/maps/place/${locationMatch[1]}`, '_blank');
+                            } else {
+                                // Fallback to a direct Google Maps search
+                                window.open('https://www.google.com/maps/search/12121+Greenspoint+Dr,+Houston,+TX+77064', '_blank');
+                            }
+                        }
+                    }
+                });
+            });
+        }
+    }
     
-    mapPlaceholders.forEach(placeholder => {
-        // Add a click event to simulate map interaction
-        placeholder.addEventListener('click', function() {
-            alert('Map integration would be implemented here in the final version.');
-        });
-    });
+    // Initialize map functionality
+    initMap();
     
     // Placeholder for image gallery functionality
     // In a real implementation, this would initialize a lightbox or gallery plugin

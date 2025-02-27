@@ -1,0 +1,593 @@
+/* 
+ * Work at SARP - Commercial Leasing Website
+ * Page-Specific Styles
+ * www.workatsarp.com
+ */
+
+/* ===== Home Page ===== */
+.property-highlights {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--light);
+}
+
+.highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.highlight-card {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform var(--transition-medium);
+}
+
+.highlight-card:hover {
+    transform: translateY(-5px);
+}
+
+.highlight-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.highlight-card h3 {
+    margin-bottom: var(--spacing-xs);
+}
+
+.about-preview {
+    padding: var(--spacing-xl) 0;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.about-content h2 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.about-content .btn {
+    margin-top: var(--spacing-sm);
+}
+
+.leasing-cta {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.location-preview {
+    padding: var(--spacing-xl) 0;
+    background-color: var(--light);
+}
+
+.location-details {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+}
+
+.location-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.location-item i {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+}
+
+.contact-preview {
+    padding: var(--spacing-xl) 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+}
+
+.contact-info h2 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-details {
+    margin: var(--spacing-md) 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+}
+
+.contact-item i {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin-right: var(--spacing-sm);
+    width: 20px;
+    text-align: center;
+}
+
+.contact-form-preview {
+    background-color: var(--light);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+}
+
+.contact-form-preview h3 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.inquiry-form .form-group {
+    margin-bottom: var(--spacing-sm);
+}
+
+/* ===== About Page Styles ===== */
+.property-overview,
+.property-features,
+.floor-plans,
+.location-advantages,
+.property-gallery,
+.property-management {
+    padding: var(--spacing-xl) 0;
+}
+
+.property-overview:nth-child(even),
+.property-features,
+.location-advantages,
+.property-management:nth-child(odd) {
+    background-color: var(--light);
+}
+
+.overview-grid,
+.management-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.feature-card {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: transform var(--transition-medium);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.coming-soon {
+    text-align: center;
+    padding: var(--spacing-lg);
+    background-color: var(--white);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.coming-soon i {
+    font-size: 4rem;
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-md);
+}
+
+.advantage-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+}
+
+.advantage-item i {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-right: var(--spacing-sm);
+    min-width: 30px;
+    text-align: center;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-sm);
+}
+
+.gallery-item {
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform var(--transition-medium);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.about-cta {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: var(--spacing-lg) 0;
+    text-align: center;
+}
+
+.about-cta h2 {
+    color: var(--white);
+}
+
+/* ===== Leasing Page Styles ===== */
+.available-spaces,
+.leasing-terms,
+.tenant-improvements,
+.leasing-process,
+.leasing-resources,
+.testimonials {
+    padding: var(--spacing-xl) 0;
+}
+
+.available-spaces:nth-child(even),
+.tenant-improvements,
+.leasing-resources,
+.testimonials {
+    background-color: var(--light);
+}
+
+.space-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-md);
+    background-color: var(--white);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: var(--spacing-md);
+}
+
+.space-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.space-details {
+    padding: var(--spacing-md);
+}
+
+.space-features {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-sm) 0;
+}
+
+.space-features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.space-features i {
+    color: var(--secondary-color);
+    margin-right: var(--spacing-xs);
+    width: 20px;
+    text-align: center;
+}
+
+.space-cta {
+    margin-top: var(--spacing-md);
+}
+
+.process-steps {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.process-step {
+    display: flex;
+    margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    width: 2px;
+    height: calc(100% + var(--spacing-md));
+    background-color: var(--secondary-color);
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: var(--spacing-md);
+    position: relative;
+    z-index: 1;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.testimonial {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: var(--spacing-md);
+}
+
+.testimonial-content {
+    font-style: italic;
+    margin-bottom: var(--spacing-md);
+    position: relative;
+}
+
+.testimonial-content::before {
+    content: '\201C';
+    font-size: 4rem;
+    position: absolute;
+    left: -20px;
+    top: -20px;
+    color: rgba(0, 0, 0, 0.1);
+    font-family: serif;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.author-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: var(--spacing-sm);
+}
+
+.author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-info h4 {
+    margin-bottom: 0;
+}
+
+.author-info p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    color: var(--medium);
+}
+
+/* ===== Contact Page Styles ===== */
+.contact-information,
+.location-map,
+.schedule-tour,
+.contact-faq {
+    padding: var(--spacing-xl) 0;
+}
+
+.contact-information:nth-child(even),
+.schedule-tour,
+.contact-faq {
+    background-color: var(--light);
+}
+
+.contact-methods {
+    margin: var(--spacing-md) 0;
+}
+
+.contact-method {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-md);
+}
+
+.method-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    margin-right: var(--spacing-sm);
+}
+
+.method-icon i {
+    font-size: 1.25rem;
+}
+
+.method-details h3 {
+    margin-bottom: var(--spacing-xs);
+}
+
+.method-details p,
+.method-details a {
+    margin-bottom: 0;
+}
+
+.social-connect {
+    margin-top: var(--spacing-md);
+}
+
+.contact-form-container {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+}
+
+.directions {
+    margin-top: var(--spacing-md);
+}
+
+.directions h3 {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.directions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.direction-item {
+    display: flex;
+    align-items: flex-start;
+}
+
+.direction-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border-radius: 50%;
+    margin-right: var(--spacing-sm);
+}
+
+.direction-icon i {
+    font-size: 1.25rem;
+}
+
+.direction-text h4 {
+    margin-bottom: var(--spacing-xs);
+}
+
+.direction-text p {
+    margin-bottom: 0;
+}
+
+.tour-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.tour-image {
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tour-benefits {
+    list-style: none;
+    padding: 0;
+    margin: var(--spacing-md) 0;
+}
+
+.tour-benefits li {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.tour-benefits i {
+    color: var(--secondary-color);
+    margin-right: var(--spacing-xs);
+}
+
+.tour-cta {
+    display: flex;
+    align-items: center;
+}
+
+.or-divider {
+    margin: 0 var(--spacing-sm);
+    color: var(--medium);
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: var(--spacing-md);
+}
+
+.faq-item {
+    background-color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.faq-item h3 {
+    margin-bottom: var(--spacing-sm);
+    color: var(--primary-color);
+}
+
+.faq-item p {
+    margin-bottom: 0;
+}
+
+/* ===== Responsive Page Styles ===== */
+@media (max-width: 768px) {
+    .about-grid,
+    .contact-grid,
+    .overview-grid,
+    .management-grid,
+    .space-card,
+    .tour-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
