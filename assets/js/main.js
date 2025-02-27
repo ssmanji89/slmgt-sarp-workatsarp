@@ -26,6 +26,98 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Hero Carousel
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.hero-dot');
+    const heroPrev = document.querySelector('.hero-prev');
+    const heroNext = document.querySelector('.hero-next');
+    let currentSlide = 0;
+    let slideInterval;
+    
+    // Initialize carousel
+    function initCarousel() {
+        if (heroSlides.length > 0) {
+            // Start automatic slideshow
+            startSlideshow();
+            
+            // Add event listeners for controls
+            if (heroPrev) {
+                heroPrev.addEventListener('click', prevSlide);
+            }
+            
+            if (heroNext) {
+                heroNext.addEventListener('click', nextSlide);
+            }
+            
+            // Add event listeners for dots
+            heroDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+            
+            // Pause slideshow on hover
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                heroSection.addEventListener('mouseenter', () => {
+                    clearInterval(slideInterval);
+                });
+                
+                heroSection.addEventListener('mouseleave', () => {
+                    startSlideshow();
+                });
+            }
+        }
+    }
+    
+    // Go to specific slide
+    function goToSlide(index) {
+        // Remove active class from all slides and dots
+        heroSlides.forEach(slide => {
+            slide.classList.remove('active');
+        });
+        
+        heroDots.forEach(dot => {
+            dot.classList.remove('active');
+        });
+        
+        // Add active class to current slide and dot
+        heroSlides[index].classList.add('active');
+        heroDots[index].classList.add('active');
+        
+        // Update current slide index
+        currentSlide = index;
+    }
+    
+    // Go to next slide
+    function nextSlide() {
+        let nextIndex = currentSlide + 1;
+        if (nextIndex >= heroSlides.length) {
+            nextIndex = 0;
+        }
+        goToSlide(nextIndex);
+    }
+    
+    // Go to previous slide
+    function prevSlide() {
+        let prevIndex = currentSlide - 1;
+        if (prevIndex < 0) {
+            prevIndex = heroSlides.length - 1;
+        }
+        goToSlide(prevIndex);
+    }
+    
+    // Start automatic slideshow
+    function startSlideshow() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+            nextSlide();
+        }, 5000); // Change slide every 5 seconds
+    }
+    
+    // Initialize carousel
+    initCarousel();
+    
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {

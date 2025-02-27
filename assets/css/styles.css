@@ -255,12 +255,27 @@ img {
     overflow: hidden;
 }
 
+.hero-slider {
+    height: 100%;
+    position: relative;
+}
+
 .hero-slide {
     height: 100%;
     width: 100%;
     background-size: cover;
     background-position: center;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+    z-index: 1;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    z-index: 2;
 }
 
 .hero-slide::before {
@@ -299,6 +314,61 @@ img {
 .hero-buttons {
     display: flex;
     gap: var(--spacing-sm);
+}
+
+.hero-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.hero-prev,
+.hero-next {
+    background-color: rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 15px;
+}
+
+.hero-prev:hover,
+.hero-next:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-dots {
+    display: flex;
+    gap: 10px;
+}
+
+.hero-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-dot.active {
+    background-color: var(--white);
+}
+
+.hero-dot:hover {
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* ===== Property Highlights ===== */
@@ -395,10 +465,17 @@ img {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.map-placeholder img {
+.map-embed {
     width: 100%;
     height: 400px;
-    object-fit: cover;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+}
+
+.map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
 }
 
 .location-details {
