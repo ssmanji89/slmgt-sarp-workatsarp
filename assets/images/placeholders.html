@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Placeholders for Work at SARP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .placeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .placeholder {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .placeholder h2 {
+            margin-top: 0;
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 200px;
+            background-color: #003366;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .logo-placeholder {
+            height: 60px;
+            background-color: #003366;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 10px;
+        }
+        
+        .logo-placeholder .title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .logo-placeholder .subtitle {
+            font-size: 10px;
+        }
+        
+        .map-placeholder {
+            background-color: #e9ecef;
+            position: relative;
+        }
+        
+        .map-placeholder::after {
+            content: "Map Placeholder";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #6c757d;
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Placeholders for Work at SARP</h1>
+    
+    <div class="instructions">
+        <p>This page provides placeholder images for the Work at SARP website. In a production environment, these would be replaced with actual images of the property.</p>
+        <p>To use these placeholders:</p>
+        <ol>
+            <li>Take screenshots of the placeholders below</li>
+            <li>Save the screenshots as image files (PNG or JPG)</li>
+            <li>Use the saved images in the website</li>
+        </ol>
+    </div>
+    
+    <h2>Logo Placeholder</h2>
+    <div class="logo-placeholder">
+        <div class="title">WORK AT SARP</div>
+        <div class="subtitle">Commercial Leasing</div>
+    </div>
+    
+    <h2>Image Placeholders</h2>
+    <div class="placeholder-grid">
+        <div class="placeholder">
+            <h2>Property Exterior</h2>
+            <div class="placeholder-image">
+                <div>Property Exterior</div>
+                <div>12121 Greenspoint Dr</div>
+            </div>
+        </div>
+        
+        <div class="placeholder">
+            <h2>Building Entrance</h2>
+            <div class="placeholder-image">
+                <div>Building Entrance</div>
+                <div>12121 Greenspoint Dr</div>
+            </div>
+        </div>
+        
+        <div class="placeholder">
+            <h2>Retail Space</h2>
+            <div class="placeholder-image">
+                <div>Retail Space</div>
+                <div>~17,368 SF</div>
+            </div>
+        </div>
+        
+        <div class="placeholder">
+            <h2>Interior View</h2>
+            <div class="placeholder-image">
+                <div>Interior View</div>
+                <div>12121 Greenspoint Dr</div>
+            </div>
+        </div>
+        
+        <div class="placeholder">
+            <h2>Parking Area</h2>
+            <div class="placeholder-image">
+                <div>Parking Area</div>
+                <div>12121 Greenspoint Dr</div>
+            </div>
+        </div>
+        
+        <div class="placeholder">
+            <h2>Surrounding Area</h2>
+            <div class="placeholder-image">
+                <div>Surrounding Area</div>
+                <div>Greater Greenspoint</div>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Map Placeholder</h2>
+    <div class="map-placeholder" style="height: 400px;"></div>
+</body>
+</html>

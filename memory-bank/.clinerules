@@ -1,0 +1,67 @@
+# Project Intelligence: www.workatsarp.com
+
+## Branding Guidelines
+- Follow ZG Companies branding as seen on www.zgcompanies.com
+- Maintain consistency with Living at SARP branding (www.livingatsarp.com)
+- Use professional, clean design suitable for commercial real estate
+
+## Project Patterns
+- Jekyll static site hosted on GitHub Pages
+- Mobile-first responsive design
+- Component-based architecture for reusability
+- Minimal JavaScript for enhanced functionality
+- Third-party services for dynamic elements (forms, maps)
+
+## User Preferences
+- Microsoft ecosystem integration for business processes
+- Clean, professional aesthetic for commercial property marketing
+- Emphasis on visual presentation of property features
+- Clear calls-to-action for leasing inquiries
+
+## Implementation Paths
+- Use Jekyll's built-in features before adding plugins
+- Ensure all plugins are GitHub Pages compatible
+- Implement responsive design from the beginning
+- Optimize images for performance
+- Create placeholder sections for upcoming content (floor plans)
+
+## Known Challenges
+- GitHub Pages limitations for dynamic content
+- Balancing visual appeal with performance
+- Integration with Microsoft ecosystem
+- Handling form submissions without server-side processing
+
+## Tool Usage Patterns
+- Jekyll for static site generation
+- GitHub for version control and hosting
+- Third-party services for form handling
+- External APIs for maps and other interactive elements
+- CSS frameworks for responsive design implementation
+
+## Content Management
+- Use Jekyll's front matter for page metadata
+- Organize content in markdown files for easy editing
+- Store structured data in YAML files
+- Use collections for organizing related content
+- Implement clear naming conventions for files and directories
+
+## Performance Considerations
+- Optimize images before adding to the site
+- Minimize external dependencies
+- Implement lazy loading for non-critical resources
+- Use appropriate caching strategies
+- Monitor page speed regularly
+
+## SEO Strategy
+- Implement proper meta tags for all pages
+- Use semantic HTML structure
+- Create XML sitemap for search engines
+- Implement structured data for local business
+- Focus on location-based keywords for commercial real estate
+
+## Deployment Workflow
+- Test locally before pushing to GitHub
+- Use GitHub Pages for automatic deployment
+- Implement custom domain configuration
+- Monitor build process for errors
+- Maintain backup of critical content
