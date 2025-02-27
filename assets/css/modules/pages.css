@@ -466,6 +466,63 @@
     gap: var(--spacing-sm);
 }
 
+/* Email Contact Styles */
+.email-contact-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.email-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+}
+
+.email-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    background-color: var(--light);
+    border-radius: var(--border-radius-sm);
+}
+
+.email-info-item i {
+    font-size: 1.25rem;
+    color: var(--secondary-color);
+    margin-top: 2px;
+}
+
+.email-info-item p {
+    margin: 0;
+}
+
+.email-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: var(--spacing-sm);
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+.email-note {
+    margin-top: var(--spacing-sm);
+    font-size: 0.9rem;
+    color: var(--medium);
+}
+
+@media (max-width: 768px) {
+    .email-info {
+        grid-template-columns: 1fr;
+    }
+}
+
 .directions {
     margin-top: var(--spacing-md);
 }
